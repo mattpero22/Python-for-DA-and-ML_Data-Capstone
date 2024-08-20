@@ -30,7 +30,11 @@ Project steps:
     1. Identify and test an API to retrieve stock data from 2006 thru 2016
         - yahoo with pandas_datareader not wokrking
         - yfinance seems to have promise
-        - finally had to settle on TIINGO and not using pandas_datareader. Rather I used requests.
+        - finally had to settle on Tiingo and not using pandas_datareader. Rather, I used requests to connect to Tiingo REST API.
 
     2. scrape the data into a local file so I do not need to make an API call for each run
-        - used the json library
+        - used the json library to collect API response and parse into json files which can be loaded into a pandas df.
+            -- looking at the data, there are no nested columns in the return data (1 column with 1 value, not an array of values)
+
+    3. aggregate data into a single dataframe called bank_stocks, use the tickers as a key parameter
+        - columns have identical names across all retrieved data, so pd.concat should do the trick 
