@@ -13,9 +13,10 @@ Deactivate with deactivate when finished.
 dependencies
     numpy   -- math library
     pandas  -- relational dataframe library for data handling
-    pandas_datareader -- retrieves data for stocks
-        # had to change the LooseVersion to Version from packaging to handle deprecated package 'distutils' -- (https://stackoverflow.com/questions/77767572/pandas-datareader-error-no-module-named-distutils)
     python-dotenv -- loads environment variables from the .environment
+    requests -- handles api call and response from TIINGO
+    
+
 
 
 
@@ -31,5 +32,5 @@ Project steps:
         - yfinance seems to have promise
         - finally had to settle on TIINGO and not using pandas_datareader. Rather I used requests.
 
-    2. scrape the data into a csv so I do not need to make an API call for each run
-        - pandas.to_csv() and pandas.load_csv()
+    2. scrape the data into a local file so I do not need to make an API call for each run
+        - used the json library
