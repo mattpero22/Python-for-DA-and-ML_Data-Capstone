@@ -1,0 +1,35 @@
+TO SET UP PYTHON venv
+
+Install Python if not already installed.
+Create a virtual environment: python -m venv venv.
+Activate the virtual environment:
+Windows: venv\Scripts\activate
+macOS/Linux: source venv/bin/activate
+Install dependencies as needed using pip.
+Freeze dependencies to requirements.txt if necessary.
+Deactivate with deactivate when finished.
+
+
+dependencies
+    numpy   -- math library
+    pandas  -- relational dataframe library for data handling
+    pandas_datareader -- retrieves data for stocks
+        # had to change the LooseVersion to Version from packaging to handle deprecated package 'distutils' -- (https://stackoverflow.com/questions/77767572/pandas-datareader-error-no-module-named-distutils)
+    python-dotenv -- loads environment variables from the .environment
+
+
+
+API Selection
+    # was getting an error from the yahoo example from pandas_datareader
+        AttributeError: 'NoneType' object has no attribute 'group'
+    # found this SO from a couple months ago which suggests yfinance as an alternative-- (https://stackoverflow.com/questions/78343119/how-to-implement-web-datareader-correctly)
+        # yfinance repo -- (https://github.com/ranaroussi/yfinance)
+    
+Project steps:
+    1. Identify and test an API to retrieve stock data from 2006 thru 2016
+        - yahoo with pandas_datareader not wokrking
+        - yfinance seems to have promise
+        - finally had to settle on TIINGO and not using pandas_datareader. Rather I used requests.
+
+    2. scrape the data into a csv so I do not need to make an API call for each run
+        - pandas.to_csv() and pandas.load_csv()
