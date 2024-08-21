@@ -17,15 +17,18 @@ dependencies
     requests -- handles api call and response from TIINGO
     
 
-
-
-
 API Selection
     # was getting an error from the yahoo example from pandas_datareader
         AttributeError: 'NoneType' object has no attribute 'group'
     # found this SO from a couple months ago which suggests yfinance as an alternative-- (https://stackoverflow.com/questions/78343119/how-to-implement-web-datareader-correctly)
         # yfinance repo -- (https://github.com/ranaroussi/yfinance)
     
+
+General Notes
+    - .xs() is used to get a cross-section of a multi index dataframe
+
+
+
 Project steps:
     1. Identify and test an API to retrieve stock data from 2006 thru 2016
         - yahoo with pandas_datareader not wokrking
@@ -38,3 +41,7 @@ Project steps:
 
     3. aggregate data into a single dataframe called bank_stocks, use the tickers as a key parameter
         - columns have identical names across all retrieved data, so pd.concat should do the trick 
+
+    4. answer the following questions:
+        - what is the max close price for each bank's stock over this period?
+        

@@ -21,6 +21,7 @@ def get_tiingo_stock_data (ticker):
         requestResponse = requests.get(request_url, headers=headers)
         return requestResponse.json()
 
+# work in tandem with get_tiingo_stock_data to dump the json response into a local file
 def scrape_stock_data(tickers):
     for ticker in tickers:
         json_data = get_tiingo_stock_data(ticker)
@@ -28,16 +29,24 @@ def scrape_stock_data(tickers):
             json.dump(json_data, f, ensure_ascii=False, indent=4)
 
 
+# go through directory of json files and aggregate the data into a MultiIndex dataframe
 def aggregate_bank_data(tickers):
     dataframes = [pd.read_json(f"./stock_data/{ticker}_data.json") for ticker in tickers]
     df = pd.concat(dataframes, axis=1, keys=STOCK_TICKERS)
     return df
 
+# get the max close amount for each company given from the dataset
+def get_max_close(data, tickers):
+    arr  = [(float(data.xs(f"{ticker}", axis=1)["close"].max()), f"{ticker}") for ticker in tickers]
+    return arr
+
 
 def main():
     bank_data = aggregate_bank_data(STOCK_TICKERS)
+    bank_data.columns.names = ['Bank Ticker','Stock Info']
+    arr_closes = get_max_close(bank_data, STOCK_TICKERS)
     print(bank_data.head())
-
+    print(bank_data.xs(key='close',axis=1,level='Stock Info').max())
 
 if __name__ == '__main__':
     main()
