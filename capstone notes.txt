@@ -26,6 +26,7 @@ API Selection
 
 General Notes
     - .xs() is used to get a cross-section of a multi index dataframe
+    - used python debugger to confirm the size for the bank_data dataframe
 
 
 
